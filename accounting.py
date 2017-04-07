@@ -29,7 +29,8 @@ def calculate_orders_by_type(file_path):
 
     #print dividing line
     dividing_line()
-
+    print "TOTAL REVENUE BY MELON TYPE"
+    print
     #define variables
     melon_prices = {"Musk": 1.15, "Hybrid": 1.30, "Watermelon": 1.75, "Winter": 4.00}
     total_revenue = 0
@@ -62,23 +63,27 @@ def calculate_sales_by_sale_type(file_path):
     #open data file
     my_file = open(file_path)
 
-    #define variable
-    sales = [0, 0]
+    #define variables
+    online_sales = 0
+    salesperson_sales = 0
 
     #iterate through file data and calculate sales totals
     for line in my_file:
-        d = line.split("|")
-        if d[1] == "0":
-            sales[0] += float(d[3])
+        data = line.split("|")
+        #online sales have '0' in the second field of the file
+        if data[1] == "0":
+            online_sales += float(data[3])
         else:
-            sales[1] += float(d[3])
+            salesperson_sales += float(data[3])
 
     #print dividing line
     dividing_line()
 
-    print "Salespeople generated ${:.2f} in revenue.".format(sales[1])
-    print "Internet sales generated ${:.2f} in revenue.".format(sales[0])
-    if sales[1] > sales[0]:
+    print "SALES DATA"
+    print
+    print "Salespeople generated ${:.2f} in revenue.".format(salesperson_sales)
+    print "Internet sales generated ${:.2f} in revenue.".format(online_sales)
+    if salesperson_sales > online_sales:
         print "Guess there's some value to those salespeople after all."
     else:
         print "Time to fire the sales team! Online sales rule all!"
